@@ -1,14 +1,15 @@
 import json
-import django
 import os
+
+import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project.settings")
 django.setup()
 
-from db.models import Race, Skill, Guild, Player
+from db.models import Guild, Player, Race, Skill  # noqa: E402
 
 
-def main():
+def main() -> None:
     with open("players.json", "r") as f:
         players_data = json.load(f)
 
@@ -24,7 +25,7 @@ def main():
                 name=skill_data["name"],
                 defaults={
                     "bonus": skill_data["bonus"],
-                    "race": race
+                    "race": race,
                 }
             )
 
